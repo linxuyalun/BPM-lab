@@ -1,7 +1,8 @@
-import Header from './Header';
-import Home from './Home';
-import React from 'react';
-import { connect } from 'react-redux';
+import Header from './Header'
+import Home from './Home'
+import React from 'react'
+import { connect } from 'react-redux'
+import { Route } from 'react-router-dom'
 
 const mapStateToProps = state => ({
   appName: state.appName
@@ -12,7 +13,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <Header appName={this.props.appName} />
-        <Home />
+        <Route path="/" exact component={Home} />
       </React.Fragment>
       
     );
