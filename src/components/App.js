@@ -3,7 +3,8 @@ import Home from './Home'
 import React from 'react'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
-import agent from '../agent';
+import agent from '../agent'
+
 
 
 const mapStateToProps = state => ({
@@ -12,18 +13,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: (payload, token) =>
-    dispatch({ type: 'APP_LOAD', payload, token }),
+  onLoad: (payload) =>
+    dispatch({ type: 'APP_LOAD', payload }),
 })
 
 class App extends React.Component {
 
   componentWillMount() {
     const token = window.localStorage.getItem('jwt');
-    if (token) {
-      agent.setToken(token);
-    }
-    this.props.onLoad(token ? agent.Auth.current() : null, token);
+    agent.setToken(token)
+    this.props.onLoad(token ? agent.Auth.current() : null);
   }
 
   render() {

@@ -18,8 +18,8 @@ const LoggedOutView = props => {
     return (
       <React.Fragment>
         <Button color="inherit"><Link to="/" style={{color: "White"}}>Home</Link></Button>
-              <Button color="inherit">Sign Up</Button>
-              <Button color="inherit"><Link to="login" style={{color: "White"}}>Sign In</Link></Button>
+        <Button color="inherit"><Link to="register" style={{color: "White"}}>Sign Up</Link></Button>
+        <Button color="inherit"><Link to="login" style={{color: "White"}}>Sign In</Link></Button>
       </React.Fragment>
     );
   }

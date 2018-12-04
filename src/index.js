@@ -4,6 +4,7 @@ import React from 'react'
 import store from './store'
 import App from './components/App'
 import Login from './components/Login'
+import Register from './components/Register'
 
 import { BrowserRouter as Router, Route } from "react-router-dom"
 
@@ -15,6 +16,7 @@ ReactDOM.render((
       <div>
         <Route path="/" exact component={App} />
         <Route path="/login" component={Login} />
+        <Route path='/register' component={Register} />
       </div>
     </Router>
   </Provider> 

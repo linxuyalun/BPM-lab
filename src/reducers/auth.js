@@ -1,10 +1,12 @@
 export default (state = {}, action) => {
     switch (action.type) {
         case 'LOGIN':
+        case 'REGISTER':
             return {
                 ...state,
                 inProgress: false,
-                errors: action.error ? action.payload.errors : null
+                errors: action.error ? action.payload.errors : null,
+                token: action.error ? action.payload.errors : action.payload.user.token
             };
         case 'ASYNC_START':
             if (action.subtype === 'LOGIN' || action.subtype === 'REGISTER') {
