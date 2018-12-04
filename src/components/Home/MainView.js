@@ -13,7 +13,7 @@ const styles = {
 };
 
 const mapStateToProps = state => ({
-  articles: state.articles
+  articles: state.home.articles
 });
 
 class MainView extends React.Component {

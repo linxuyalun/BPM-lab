@@ -1,22 +1,15 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { promiseMiddleware } from './middleware'
+import auth from './reducers/auth'
+import common from './reducers/common'
+import home from './reducers/home'
 
-const defaultState = {
-    appName: 'Hermes',
-    articles: null
-  };
   
-const reducer = function(state = defaultState, action) {
-    switch(action.type) {
-      case 'HOME_PAGE_LOADED':
-        return {
-          ...state,
-          articles: action.payload.articles
-        };
-      default:
-        return state;
-    }
-};
+const reducer = combineReducers({
+  auth,
+  common,
+  home
+});
   
 const middleware = applyMiddleware(promiseMiddleware);
   
@@ -25,6 +18,6 @@ const storeEnhancers = compose(
     (window && window.__REDUX_DEVTOOLS_EXTENSION__)? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f,
 );
   
-const store = createStore(reducer, defaultState, storeEnhancers);
+const store = createStore(reducer, {}, storeEnhancers);
 
 export default store;
