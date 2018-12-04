@@ -10,11 +10,36 @@ const styles = {
   },
   grow: {
     flexGrow: 1,
-  },
-  Link: {
-    color: "White"
   }
 };
+
+const LoggedOutView = props => {
+  if (!props.currentUser) {
+    return (
+      <React.Fragment>
+        <Button color="inherit"><Link to="/" style={{color: "White"}}>Home</Link></Button>
+              <Button color="inherit">Sign Up</Button>
+              <Button color="inherit"><Link to="login" style={{color: "White"}}>Sign In</Link></Button>
+      </React.Fragment>
+    );
+  }
+
+  return null;
+}
+
+const LoggedInView = props => {
+  if (props.currentUser) {
+    return (
+      <React.Fragment>
+        <Button color="inherit"><Link to="/" style={{color: "White"}}>Home</Link></Button>
+        <Button color="inherit"><Link to="editor" style={{color: "White"}}>New Post</Link></Button>
+        <Button color="inherit"><Link to="settings" style={{color: "White"}}>{props.currentUser.username}</Link></Button>
+      </React.Fragment>
+    );
+  }
+
+  return null;
+}
 
 function Header(props) {
 
@@ -25,13 +50,12 @@ function Header(props) {
       <AppBar position="static" color="primary">
           <Toolbar>
             <Typography variant="title" color="inherit" className={classes.grow}>
-              <Link to="/" className={classes.Link}>
+              <Link to="/" style={{color: "White"}}>
                 {appName.toLowerCase()}
               </Link>
             </Typography>
-            <Button color="inherit"><Link to="/" className={classes.Link}>Home</Link></Button>
-            <Button color="inherit">Sign In</Button>
-            <Button color="inherit"><Link to="login" className={classes.Link}>Sign Up</Link></Button>
+            <LoggedInView currentUser={props.currentUser} />
+            <LoggedOutView currentUser={props.currentUser} />
         </Toolbar>
       </AppBar>
     </div>

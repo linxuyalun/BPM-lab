@@ -4,7 +4,10 @@ import agent from '../agent'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const mapStateToProps = state => ({ ...state.auth });
+const mapStateToProps = state => ({
+    ...state.auth,
+    redirectTo: state.common.redirectTo
+});
 
 const mapDispatchToProps = dispatch => ({
     onChangeEmail: value =>
@@ -12,13 +15,15 @@ const mapDispatchToProps = dispatch => ({
     onChangePassword: value =>
       dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'password', value }),
     onSubmit: (email, password) =>
-      dispatch({ type: 'LOGIN', payload: agent.Auth.login(email, password) })
+        dispatch({ type: 'LOGIN', payload: agent.Auth.login(email, password) }),
+    onRedirect: () =>
+        dispatch({ type: 'REDIRECT' })
 });
   
 
 
 class Login extends React.Component {
-    
+
     constructor() {
       super();
       this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
@@ -28,6 +33,17 @@ class Login extends React.Component {
         this.props.onSubmit(email, password);
       };
     }
+
+    // if login successfully, redirect to home page
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.redirectTo) {
+          console.log(nextProps.redirectTo)
+          this.props.history.push(nextProps.redirectTo);
+          // clear redirectTo property after jump
+          this.props.onRedirect();
+        }
+      }
+    
   
     render() {
       const email = this.props.email;

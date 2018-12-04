@@ -5,7 +5,7 @@ import store from './store'
 import App from './components/App'
 import Login from './components/Login'
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Route } from "react-router-dom"
 
 
 
