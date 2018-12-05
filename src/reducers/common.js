@@ -19,6 +19,19 @@ export default (state = defaultState, action) => {
                 redirectTo: action.error ? null : '/',
                 currentUser: action.error ? null : action.payload.user
             };
+        case 'LOGOUT':
+            return { 
+                ...state, 
+                redirectTo: '/', 
+                token: null, 
+                currentUser: null 
+            };
+        case 'SETTINGS_SAVED':
+            return {
+                ...state,
+                redirectTo: action.error ? null : '/',
+                currentUser: action.error ? null : action.payload.user
+            }
         default:
             return state;
     }
