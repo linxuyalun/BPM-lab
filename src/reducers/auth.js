@@ -8,6 +8,9 @@ export default (state = {}, action) => {
                 errors: action.error ? action.payload.errors : null,
                 token: action.error ? action.payload.errors : action.payload.user.token
             };
+        case 'LOGIN_PAGE_UNLOADED':
+        case 'REGISTER_PAGE_UNLOADED':
+            return {};
         case 'ASYNC_START':
             if (action.subtype === 'LOGIN' || action.subtype === 'REGISTER') {
                 return { ...state, inProgress: true };

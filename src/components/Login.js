@@ -59,7 +59,9 @@ const mapDispatchToProps = dispatch => ({
     onSubmit: (email, password) =>
         dispatch({ type: 'LOGIN', payload: agent.Auth.login(email, password) }),
     onRedirect: () =>
-        dispatch({ type: 'REDIRECT' })
+        dispatch({ type: 'REDIRECT' }),
+    onUnload: () =>
+      dispatch({ type: 'LOGIN_PAGE_UNLOADED' })
 });
   
 
@@ -84,7 +86,12 @@ class Login extends React.Component {
           // clear redirectTo property after jump
           this.props.onRedirect();
         }
-      }
+    }
+
+    componentWillUnmount = () => {
+      this.props.onUnload()
+    }
+    
     
     render() {
       const { email, password, classes } = this.props
