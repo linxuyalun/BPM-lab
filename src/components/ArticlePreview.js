@@ -1,7 +1,8 @@
 import React from 'react';
-import { Avatar, Typography, Button, Chip } from '@material-ui/core'
+import { Avatar, Typography, Button } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import FavoriteIcon from '@material-ui/icons/Favorite'
+import { Link } from 'react-router-dom'
 
 
 
@@ -44,7 +45,7 @@ const ArticlePreview = props => {
 
       </div>
 
-      <a to={`article/${article.slug}`} className="preview-link">
+      <Link to={`article/${article.slug}`} className="preview-link">
         <h1>{article.title}</h1>
         <p>{article.description}</p>
         <span>Read more...</span>
@@ -59,7 +60,7 @@ const ArticlePreview = props => {
             })
           }
         </ul>
-      </a>
+      </Link>
     </div>
   );
 }
