@@ -7,15 +7,11 @@ function isPromise(v) {
 
 const promiseMiddleware = store => next => action => {
     if (isPromise(action.payload)) {
-        store.dispatch({ type: 'ASYNC_START', subtype: action.type })
+        store.dispatch({ type: 'ASYNC_START' })
         action.payload.then(
             res => {
                 action.payload = res;
-                store.dispatch(action);
-            },
-            error => {
-                action.error = true;
-                action.payload = error.response.body;
+                console.log(action.payload)
                 store.dispatch(action);
             }
         );
@@ -29,11 +25,11 @@ const promiseMiddleware = store => next => action => {
 const localStorageMiddleware = store => next => action => {
     if (action.type === 'REGISTER' || action.type === 'LOGIN') {
       if (!action.error) {
-        window.localStorage.setItem('jwt', action.payload.user.token);
-        agent.setToken(action.payload.user.token);
+        window.localStorage.setItem('id', action.payload.user.id);
+        agent.setToken(action.payload.user.id);
       }
     } else if (action.type === 'LOGOUT') {
-      window.localStorage.setItem('jwt', '');
+      window.localStorage.setItem('id', '');
       agent.setToken(null);
     }
   
@@ -41,7 +37,6 @@ const localStorageMiddleware = store => next => action => {
   };
 
 export {
-    localStorageMiddleware,
     promiseMiddleware
 };
 

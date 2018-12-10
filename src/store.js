@@ -1,21 +1,15 @@
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import { promiseMiddleware, localStorageMiddleware } from './middleware'
-import auth from './reducers/auth'
+import { promiseMiddleware } from './middleware'
 import common from './reducers/common'
-import home from './reducers/home'
-import settings from './reducers/settings'
-import article from './reducers/article'
+import user from './reducers/user'
 
   
 const reducer = combineReducers({
-  auth,
   common,
-  home,
-  settings,
-  article
+  user
 });
   
-const middleware = applyMiddleware(promiseMiddleware, localStorageMiddleware);
+const middleware = applyMiddleware(promiseMiddleware);
   
 const storeEnhancers = compose(
     middleware,
