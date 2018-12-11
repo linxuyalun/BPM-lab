@@ -8,10 +8,10 @@ function isPromise(v) {
 const promiseMiddleware = store => next => action => {
     if (isPromise(action.payload)) {
         store.dispatch({ type: 'ASYNC_START' })
+        console.log(action.payload)
         action.payload.then(
             res => {
                 action.payload = res;
-                console.log(action.payload)
                 store.dispatch(action);
             }
         );

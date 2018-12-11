@@ -2,6 +2,7 @@ export default (state={}, action) => {
     switch(action.type) {
         case 'LOGIN':
         case 'REGISTER':
+        case 'SETTINGS_SAVED':
             return {
                 ...state,
                 username: action.payload.user.username,
@@ -16,4 +17,3 @@ export default (state={}, action) => {
             return state;
     }
 }
-

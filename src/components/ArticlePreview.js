@@ -1,5 +1,5 @@
 import React from 'react'
-import { Toolbar, Grid, Avatar, Typography, Button } from '@material-ui/core'
+import { Toolbar, Grid, Avatar, Typography, Button, Chip } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
@@ -39,20 +39,17 @@ export default withStyles(styles)(({article, classes}) => {
             <Typography variant="h6" className={classes.username}>
                 {article.author.username}
             </Typography>
-            {
-                !article.favorited &&
-                <Button className={classes.button} >
+            <Button className={classes.button} >
+                {
+                    !article.favorited &&
                     <FavoriteBorderIcon color="secondary" fontSize="small" className={classes.icon}/>
-                    {article.favoritesCount}
-                </Button>
-            }
-            {
-                article.favorited &&
-                <Button className={classes.button} >
+                }
+                {
+                    article.favorited &&
                     <FavoriteIcon color="secondary" fontSize="small" className={classes.icon}/>
+                }    
                     {article.favoritesCount}
-                </Button>
-            }
+            </Button>
         </Toolbar>
         <Typography variant="caption" color="secondary">
             {new Date(article.createdAt).toDateString()}

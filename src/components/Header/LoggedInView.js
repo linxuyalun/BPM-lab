@@ -56,7 +56,7 @@ class LoggedInView extends React.Component {
                       </Typography>
                       </Link>
                       <FaceIcon className={classes.icon}/>
-                      <Link to="/">
+                      <Link to={`@${user.username}`}>
                       <Typography variant="subheading" className={classes.text} >
                           {user.username}
                       </Typography>

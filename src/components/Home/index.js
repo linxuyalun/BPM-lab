@@ -6,17 +6,26 @@ import { Grid } from '@material-ui/core'
 
 
 const mapStateToProps = state => ({
-  appName: state.common.appName
+  appName: state.common.appName,
+  articles: state.articles.articles
 });
 
 class Home extends React.Component {
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.redirectTo) {
+      this.props.history.push(nextProps.redirectTo);
+      this.props.onRedirect();
+    }
+  }
+  
   render() {
-    const { appName } = this.props
+    const { appName, articles } = this.props
     return (
       <React.Fragment>
         <Banner appName={appName} />
         <Grid>
-            <MainView />
+            <MainView articles={articles} />
         </Grid>
       </React.Fragment>
     );

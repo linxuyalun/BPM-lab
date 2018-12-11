@@ -5,7 +5,8 @@ import LoggedInView from './LoggedInView'
 
 const mapStateToProps = (state) => ({
     user: state.user,
-    appName: state.common.appName
+    appName: state.common.appName,
+    redirectTo: state.common.redirectTo
 });
 
 class Header extends React.Component {

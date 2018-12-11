@@ -11,9 +11,9 @@ const requests = {
     del: url =>
         superagent.del(`${API_ROOT}${url}`).then(responseBody),
     post: (url, body) =>
-        superagent.post(`${API_ROOT}${url}`, body).then(responseBody),
+        superagent.post(`${API_ROOT}${url}`).send(body).then(responseBody),
     put: (url, body) =>
-        superagent.put(`${API_ROOT}${url}`, body).then(responseBody)
+        superagent.put(`${API_ROOT}${url}`).send(body).then(responseBody)
 };
 
 const Auth = {
@@ -21,8 +21,15 @@ const Auth = {
         requests.post('/users/login', { user: { username, password }}),
     register: (username, email, password) =>
         requests.post('/users', { user: { username, email, password }}),
-    save: user =>
-        requests.put('/user', { user })
+    getUser: id =>
+        requests.post('/users/get', {user:{id}}),
+    save: user => 
+        requests.put('/users', { user })
+}
+
+const Profile = {
+    get: (id, username) =>
+        requests.post('/profiles',{ user1:{id}, user2:{username} })
 }
 
 
@@ -49,5 +56,6 @@ const Comments = {
 export default {
     Articles,
     Auth,
-    Comments
+    Comments,
+    Profile
 }

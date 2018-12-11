@@ -2,11 +2,15 @@ import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import { promiseMiddleware } from './middleware'
 import common from './reducers/common'
 import user from './reducers/user'
+import profile from './reducers/profile'
+import articles from './reducers/articles'
 
   
 const reducer = combineReducers({
   common,
-  user
+  user,
+  profile,
+  articles
 });
   
 const middleware = applyMiddleware(promiseMiddleware);

@@ -26,7 +26,7 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, profile } = this.props;
     const { tabValue } = this.state ;
     return (
       <React.Fragment>
@@ -41,16 +41,12 @@ class MainView extends React.Component {
             fullWidth 
             className={classes.AppBar}
           >
-            <Tab label="Recommendation"/>
-            <Tab label="Gloabal" />
-            <Tab label="Favorite" />
-            <Tab label="Tag" />
+            <Tab label={profile.username + "'s artciles"} />
+            <Tab label={profile.username + "'s favorites"} />
           </Tabs>
         </AppBar>
         {tabValue === 0 && <ArticleList articles={this.props.articles}/>}
-        {tabValue === 1 && <ArticleList articles={this.props.articles}/>}
-        {tabValue === 2 && <div>Todo</div>}
-        {tabValue === 3 && <div>Todo</div>}
+        {tabValue === 1 && <div>Todo</div>}
       </React.Fragment>
     );
   }

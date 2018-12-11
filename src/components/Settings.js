@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
 import TextField from '@material-ui/core/TextField'
+import agent from '../agent'
 
 const styles = theme => ({
   main: {
@@ -54,8 +55,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onClickLogout: () => 
     dispatch({ type: 'LOGOUT' }),
-  /*onSubmitForm: user =>
-      dispatch({ type: 'SETTINGS_SAVED', payload: agent.Auth.save(user) }),*/
+  onSubmitForm: user =>{
+    dispatch({ type: 'SETTINGS_SAVED', payload: agent.Auth.save(user) })
+  },
   onRedirect: () =>
     dispatch({ type: 'REDIRECT' })
 });
@@ -65,6 +67,7 @@ class Settings extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            id: props.id,
             image: props.image,
             username: props.username,
             bio: props.bio,
@@ -158,6 +161,7 @@ class Settings extends React.Component {
                     type="submit"
                     variant="contained"
                     color="primary"
+                    disabled={this.props.inProgress}
                     className={classes.submit}
                   >
                     Update your information

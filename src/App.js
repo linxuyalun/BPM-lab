@@ -6,10 +6,13 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Register from './components/Register'
 import Settings from './components/Settings'
+import Profile from './components/Profile'
 
 const mapStateToProps = state => ({
+    ...state.user,
     appName: state.common.appName
 });
+
 
 class App extends React.Component {
 
@@ -23,6 +26,7 @@ class App extends React.Component {
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <Route path="/settings" component={Settings} />
+                    <Route path="/@:username" component={Profile} />
                     </div>
                 </Router>
             </React.Fragment>
