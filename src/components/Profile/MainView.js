@@ -41,8 +41,8 @@ class MainView extends React.Component {
             fullWidth 
             className={classes.AppBar}
           >
-            <Tab label={profile.username + "'s artciles"} />
-            <Tab label={profile.username + "'s favorites"} />
+            <Tab label="articles" />
+            <Tab label="Not passed" />
           </Tabs>
         </AppBar>
         {tabValue === 0 && <ArticleList articles={this.props.articles}/>}

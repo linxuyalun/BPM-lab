@@ -44,7 +44,7 @@ class LoggedInView extends React.Component {
                       </Typography>
                       </Link>
                       <AddToPhotosIcon className={classes.icon}/>
-                      <Link to="new">
+                      <Link to="editor">
                       <Typography variant="subheading" className={classes.text} >
                           New Post
                       </Typography>

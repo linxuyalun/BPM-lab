@@ -9,6 +9,7 @@ export default (state=defaultState, action) => {
         case 'LOGIN':
         case 'REGISTER':
         case 'SETTINGS_SAVED':
+        case 'ARTICLE_PUBLISHED':
             return {
                 ...state,
                 inProgress: false,

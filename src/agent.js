@@ -29,7 +29,7 @@ const Auth = {
 
 const Profile = {
     get: (id, username) =>
-        requests.post('/profiles',{ user1:{id}, user2:{username} })
+        requests.post('/profiles', { user1:{id}, user2:{username} })
 }
 
 
@@ -39,7 +39,9 @@ const Articles = {
     del: slug =>
         requests.del(`/articles/${slug}`),
     get: slug =>
-        requests.get(`/articles/${slug}`)
+        requests.get(`/articles/${slug}`),
+    new: (id, article) =>
+        requests.post(`/articles`, { user:{id}, article })
 };
 
 
