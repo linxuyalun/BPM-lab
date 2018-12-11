@@ -15,7 +15,7 @@ The Hermes codebase uses [create-react-app](https://github.com/facebook/create-r
 
 **Notice**
 
-1. The back end's logic is naïve. It has no ability to cope with cookie or jwt. Do not use the same design idea of HTTP request in *Hermes* in your development. The solution now is a trade-off.
+1. The back end's logic is naïve. It has no ability to cope with cookie or jwt. Do not use the same design idea of HTTP request in *Hermes* in your development. Unfortunately, the solution now is actually hacking 
 2. [Back end API](https://github.com/Ddd1101/BPM_2018Fall/blob/master/hw3/README.md).
 3. The back end doesn't support CORS, so if you want to try *Hermes* on loacalhost, make sure you have disabled web security. See [here](https://github.com/zhongxia245/blog/issues/28).
 
