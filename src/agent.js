@@ -34,12 +34,12 @@ const Profile = {
 
 
 const Articles = {
-    all: page => 
-        requests.get(`/articles?limit=10`),
+    all: () => 
+        requests.get(`/articles/get`),
     del: slug =>
         requests.del(`/articles/${slug}`),
-    get: slug =>
-        requests.get(`/articles/${slug}`),
+    get: articleId =>
+        requests.get(`/articles?articleid=${articleId}`),
     new: (id, article) =>
         requests.post(`/articles`, { user:{id}, article })
 };

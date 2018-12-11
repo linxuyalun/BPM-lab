@@ -8,14 +8,13 @@ import agent from '../../agent'
 const mapStateToProps = state => ({
     profile: state.profile,
     id: state.user.id,
-    inProgress: state.common.inProgress
 })
 
 const mapDispatchToProps = dispatch => ({
     onLoad: (id, username) =>
         dispatch({type: 'PROFILE_LOADED', payload: agent.Profile.get(id, username)}),
     onUnload: () =>
-        dispatch({type: 'PROFILE_UNLOADED'})
+        dispatch({type: 'PROFILE_UNLOAD'})
 })
 
 class Profile extends React.Component {
@@ -29,11 +28,11 @@ class Profile extends React.Component {
     }
     
     render () {
-        const {profile, inProgress } = this.props
+        const { profile } = this.props
         return (
             <React.Fragment>
             {
-                !inProgress &&
+                profile.username &&
                 <React.Fragment>
                     <Banner profile={profile}/>
                     <MainView profile={profile} />
@@ -41,7 +40,7 @@ class Profile extends React.Component {
             
             }
             {
-                inProgress &&
+                !profile.username &&
                 <Loading />
             }
             </React.Fragment>

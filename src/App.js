@@ -7,7 +7,9 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Settings from './components/Settings'
 import Profile from './components/Profile'
-import Editor from './components/Editor'
+import New from './components/New'
+import Article from './components/Article'
+import Update from './components/Update'
 
 const mapStateToProps = state => ({
     ...state.user,
@@ -28,7 +30,9 @@ class App extends React.Component {
                     <Route path="/register" component={Register} />
                     <Route path="/settings" component={Settings} />
                     <Route path="/@:username" component={Profile} />
-                    <Route path="/editor" component={Editor} />
+                    <Route path="/new" component={New} />
+                    <Route path="/update" component={Update} />
+                    <Route path="/a:articleId" component={Article} />
                     </div>
                 </Router>
             </React.Fragment>

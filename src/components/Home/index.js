@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Banner from './Banner'
 import MainView from './MainView'
 import { Grid } from '@material-ui/core'
+import agent from '../../agent'
 
 
 const mapStateToProps = state => ({
@@ -10,15 +11,24 @@ const mapStateToProps = state => ({
   articles: state.articles.articles
 });
 
+const mapDispatchToProps = dispatch => ({
+  onLoad: () =>
+    dispatch({type: 'HOME_PAGE_LOADED', payload: agent.Articles.all()}),
+  onUnload: () =>
+    dispatch({type:'HOME_PAGE_UNLOAD'})
+})
+
 class Home extends React.Component {
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.redirectTo) {
-      this.props.history.push(nextProps.redirectTo);
-      this.props.onRedirect();
-    }
+  componentWillMount() {
+    this.props.onLoad()
+  }
+
+  componentWillUnmount() {
+    this.props.onUnload()
   }
   
+    
   render() {
     const { appName, articles } = this.props
     return (
@@ -32,4 +42,4 @@ class Home extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, () => ({}))(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -10,6 +10,7 @@ export default (state=defaultState, action) => {
         case 'REGISTER':
         case 'SETTINGS_SAVED':
         case 'ARTICLE_PUBLISHED':
+        case 'ARTICLE_UPDATED':
             return {
                 ...state,
                 inProgress: false,
@@ -31,8 +32,9 @@ export default (state=defaultState, action) => {
                 redirectTo: '/'
             };
         case 'APP_LOADED':
-        case 'PROFILE_LOADED':
-        case 'PROFILE_UNLOADED':
+        case 'PROFILE_UNLOAD':
+        case 'HOME_PAGE_UNLOAD':
+        case 'ARTICLE_PAGE_UNLOAD':
             return {
                 ...state,
                 inProgress: false

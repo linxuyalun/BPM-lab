@@ -2,6 +2,7 @@ import React from 'react'
 import ArticlePreview from './ArticlePreview'
 import { Grid } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
+import Loading from './Loading'
 
 
 const styles = theme => ({
@@ -12,9 +13,10 @@ const styles = theme => ({
 })
 
 const ArticleList = ({ articles, classes }) => {
+  console.log(articles)
   if (!articles) {
     return (
-      <Grid container className={classes.root}>Loading...</Grid>
+      <Loading/>
     );
   }
 
@@ -30,13 +32,17 @@ const ArticleList = ({ articles, classes }) => {
     <Grid container className={classes.root}>
       {
         articles.map(article => {
-          if (article.passState) {
+          // todo: 目前passstate是null，等到后端完善，相关代码：
+          /*
+          if (article.passstate) {
             return (
-              <ArticlePreview key={article.articleId} article={article}/>
+              <ArticlePreview key={article.id} article={article}/>
           );
           } else {
             return null;
           }
+          */
+         return <ArticlePreview key={article.id} article={article}/>
         })
       }
     </Grid>
