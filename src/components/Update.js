@@ -50,9 +50,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  onSubmitForm: (id, article) =>{
-    // todo: agent.articles.update
-    dispatch({ type: 'ARTICLE_UPDATED', payload: agent.Articles.new(id, article) })
+  onSubmitForm: (article) =>{
+    dispatch({ type: 'ARTICLE_UPDATED', payload: agent.Articles.update(article) })
   },
   onRedirect: () =>
     dispatch({ type: 'REDIRECT' })
@@ -63,10 +62,11 @@ class Update extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            title: props.title,
-            description: props.description,
-            body: props.body,
-            //tags: props.tags,
+          id: props.id,
+          title: props.title,
+          description: props.description,
+          body: props.body,
+          //tags: props.tags,
         };
 
         this.updateState = field => ev => {
@@ -78,11 +78,7 @@ class Update extends React.Component {
         this.submitForm = ev => {
             ev.preventDefault();
             const article = Object.assign({}, this.state);
-            const { id } = props
-            console.log("check 1:")
-            console.log(id)
-            console.log(article)
-            props.onSubmitForm(id, article);
+            props.onSubmitForm(article);
         };
     }
 

@@ -35,13 +35,18 @@ const Profile = {
 
 const Articles = {
     all: () => 
-        requests.get(`/articles/get`),
-    del: slug =>
-        requests.del(`/articles/${slug}`),
+        requests.get(`/articles/get?*`),
+    del: articleId =>
+        requests.del(`/articles?articleid=${articleId}`),
     get: articleId =>
-        requests.get(`/articles?articleid=${articleId}`),
+        requests.get(`/articles/get?articleid=${articleId}`),
     new: (id, article) =>
-        requests.post(`/articles`, { user:{id}, article })
+        requests.post(`/articles`, { user:{id}, article }),
+    update: (article) => {
+        console.log({article})
+        requests.put(`/articles`,{article})
+    }
+       
 };
 
 

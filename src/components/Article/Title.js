@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
+import agent from '../../agent'
+import {withRouter} from "react-router-dom"
 
 const styles = theme => ({
     main: {
@@ -26,41 +28,50 @@ const styles = theme => ({
         color: '#880e4f',
         sizeSmall: "5px"
     }
-})
+}) 
 
-const Title = ({ article, classes }) => {
-  return (
-      <div className={classes.main}>
-        <Typography variant="h4"  className={classes.title}>
-            {article.title}
-        </Typography>
-        <Typography variant="h6"  className={classes.description}>
-            {article.description}
-        </Typography>
-        <div>
-        {
-            /*Todo: 被迫写死= =
-            <Typography variant="caption">by</Typography>
-            <Typography variant="subheading" color="secondary">{article.author.username}</Typography>
-            */
-        }
-            <Typography variant="caption">by</Typography>
-            <Typography variant="subheading" color="secondary">oops!</Typography>
-            <Typography variant="caption">Posted on</Typography>
-            <Typography variant="subheading" color="secondary">{article.createat}</Typography>
-            <Link to='/update'>
-            <Button color="secondary" mini size="small" className={classes.button} >
-                <EditIcon fontSize="small"/>
-                <Typography variant="caption"> Edit</Typography>
-            </Button>
-            </Link>
-            <Button color="secondary" mini size="small" className={classes.button}>
-                <DeleteIcon fontSize="small"/>
-                <Typography variant="caption"> Delete</Typography>
-            </Button>
-        </div>
-      </div>
-  );
+class Title extends React.Component {
+
+    constructor(props) {  
+        super(props)
+        this.clickDelete = ev => {
+          ev.preventDefault();
+          agent.Articles.del(props.article.id);
+          this.props.history.push("/")
+        };
+      }
+
+    render(){
+        const { article, classes } = this.props;
+        return (
+            <div className={classes.main}>
+              <Typography variant="h4"  className={classes.title}>
+                  {article.title}
+              </Typography>
+              <Typography variant="h6"  className={classes.description}>
+                  {article.description}
+              </Typography>
+              <div>
+                  <Typography variant="caption">by</Typography>
+                  <Typography variant="subheading" color="secondary">{article.author.username}</Typography>
+                  <Typography variant="caption">Posted on</Typography>
+                  <Typography variant="subheading" color="secondary">{article.createat}</Typography>
+                  <Link to='/update'>
+                  <Button color="secondary" mini size="small" className={classes.button} >
+                      <EditIcon fontSize="small"/>
+                      <Typography variant="caption"> Edit</Typography>
+                  </Button>
+                  </Link>
+                  <Button color="secondary" mini size="small" onClick={this.clickDelete}  className={classes.button}>
+                      <DeleteIcon fontSize="small"/>
+                      <Typography variant="caption"> Delete</Typography>
+                  </Button>
+              </div>
+            </div>
+        );
+    }
 };
 
-export default withStyles(styles)(Title);
+
+
+export default withStyles(styles)(withRouter(Title));

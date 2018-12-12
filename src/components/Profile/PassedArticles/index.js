@@ -1,8 +1,8 @@
 import React from 'react'
-import ArticlePreview from './ArticlePreview'
 import { Grid } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import Loading from './Loading'
+import Loading from '../../Loading'
+import ArticlePreview from './ArticlePreview'
 
 
 const styles = theme => ({
@@ -12,7 +12,7 @@ const styles = theme => ({
   }
 })
 
-const ArticleList = ({ articles, classes }) => {
+const PassedArticles = ({ articles, classes }) => {
   console.log(articles)
   if (!articles) {
     return (
@@ -42,11 +42,11 @@ const ArticleList = ({ articles, classes }) => {
             return null;
           }
           */
-         return <ArticlePreview key={article.id} article={article}/>
+         return <ArticlePreview article={article}/>
         })
       }
     </Grid>
   );
 };
 
-export default withStyles(styles)(ArticleList);
+export default withStyles(styles)(PassedArticles);

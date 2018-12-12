@@ -25,8 +25,8 @@ The Hermes codebase uses [create-react-app](https://github.com/facebook/create-r
 - [x] check/update profile
 - [x] check articles
 - [ ] check an article state
-- [ ] post a new article
-- [ ] update/delete a article
+- [x] post a new article
+- [x] update/delete a article
 - [ ] filter articles by tag
 
 

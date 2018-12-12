@@ -1,7 +1,7 @@
 import React from 'react'
 import { AppBar, Tabs, Tab } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import ArticleList from '../ArticleList';
+import ArticleList from './ArticleList';
 
 const styles = theme => ({
   AppBar: {

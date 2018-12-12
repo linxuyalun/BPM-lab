@@ -26,7 +26,8 @@ export default (state=defaultState, action) => {
                 ...state,
                 redirectTo: null
             };
-        case 'LOGOUT':       
+        case 'LOGOUT':
+        case 'DELETE_ARTICLE':       
             return {
                 ...state,
                 redirectTo: '/'

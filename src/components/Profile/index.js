@@ -8,19 +8,24 @@ import agent from '../../agent'
 const mapStateToProps = state => ({
     profile: state.profile,
     id: state.user.id,
+    articles: state.articles.articles
 })
 
 const mapDispatchToProps = dispatch => ({
     onLoad: (id, username) =>
         dispatch({type: 'PROFILE_LOADED', payload: agent.Profile.get(id, username)}),
     onUnload: () =>
-        dispatch({type: 'PROFILE_UNLOAD'})
+        dispatch({type: 'PROFILE_UNLOAD'}),
+    // ToUpdate
+    onArticlesLoad: () =>
+        dispatch({type: 'HOME_PAGE_LOADED', payload: agent.Articles.all()}),
 })
 
 class Profile extends React.Component {
     
     componentWillMount() {
-        this.props.onLoad(this.props.id, this.props.match.params.username)
+        this.props.onLoad(this.props.id, this.props.match.params.username);
+        this.props.onArticlesLoad();
     }
 
     componentWillUnmount() {
@@ -28,14 +33,14 @@ class Profile extends React.Component {
     }
     
     render () {
-        const { profile } = this.props
+        const { profile, articles } = this.props
         return (
             <React.Fragment>
             {
                 profile.username &&
                 <React.Fragment>
                     <Banner profile={profile}/>
-                    <MainView profile={profile} />
+                    <MainView articles={articles}/>
                 </React.Fragment>
             
             }
