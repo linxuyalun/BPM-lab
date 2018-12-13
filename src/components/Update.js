@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
 import TextField from '@material-ui/core/TextField'
 import DescriptionIcon from '@material-ui/icons/Description'
+import Chip from '@material-ui/core/Chip'
 import agent from '../agent'
 
 const styles = theme => ({
@@ -41,6 +42,9 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  chip: {
+    marginRight: theme.spacing.unit * 2,
+  },
 });
 
 const mapStateToProps = state => ({
@@ -66,19 +70,18 @@ class Update extends React.Component {
           title: props.title,
           description: props.description,
           body: props.body,
-          //tags: props.tags,
         };
 
         this.updateState = field => ev => {
-            const state = this.state;
-            const newState = Object.assign({}, state, { [field]: ev.target.value });
-            this.setState(newState);
+          const state = this.state;
+          const newState = Object.assign({}, state, { [field]: ev.target.value });
+          this.setState(newState);
         };
 
         this.submitForm = ev => {
-            ev.preventDefault();
-            const article = Object.assign({}, this.state);
-            props.onSubmitForm(article);
+          ev.preventDefault();
+          const article = Object.assign({}, this.state);
+          props.onSubmitForm(article);
         };
     }
 
@@ -90,8 +93,8 @@ class Update extends React.Component {
     }
 
     render(){
-        const { classes } = this.props;
-        const { title, description, body, tags } = this.state
+        const { classes, taglist } = this.props;
+        const { title, description, body } = this.state
         return (
             <main className={classes.main}>
               <CssBaseline />
@@ -113,6 +116,21 @@ class Update extends React.Component {
                         onChange={this.updateState('title')}
                     />
                   </FormControl>
+                  {
+                    taglist &&
+                    taglist.map(tag => {
+                        return (
+                        <Chip
+                            key={tag}
+                            label={tag}
+                            className={classes.chip}
+                            color="primary"
+                            variant="outlined"
+                        />
+                        ) 
+                    })
+                  }
+
                   <br/>
                   <FormControl margin="normal" fullWidth required>
                     <TextField
@@ -125,18 +143,6 @@ class Update extends React.Component {
                         onChange={this.updateState('description')}
                     />
                   </FormControl>  
-                  <br/>
-                  <FormControl margin="normal" fullWidth>
-                    <TextField
-                        id="tags"
-                        label="Tags"
-                        placeholder="Enter Tags"
-                        margin="normal"
-                        variant="outlined"
-                        value={tags}
-                        //onChange={this.updateState('tags')}
-                    />
-                  </FormControl>
                   <br/>
                   <FormControl margin="normal" fullWidth required>
                     <TextField

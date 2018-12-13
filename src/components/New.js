@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
 import TextField from '@material-ui/core/TextField'
 import DescriptionIcon from '@material-ui/icons/Description'
+import Chip from '@material-ui/core/Chip'
 import agent from '../agent'
 
 const styles = theme => ({
@@ -41,6 +42,9 @@ const styles = theme => ({
   submit: {
     marginTop: theme.spacing.unit * 3,
   },
+  chip: {
+    marginRight: theme.spacing.unit * 2,
+  },
 });
 
 const mapStateToProps = state => ({
@@ -62,26 +66,48 @@ class Editor extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            title: '',
-            description: '',
-            body: '',
-            //tag: '',
+          title: '',
+          description: '',
+          body: '',
+          taglist: [],
+          tag: '',
         };
 
         this.updateState = field => ev => {
-            const state = this.state;
-            const newState = Object.assign({}, state, { [field]: ev.target.value });
-            this.setState(newState);
+          const state = this.state;
+          const newState = Object.assign({}, state, { [field]: ev.target.value });
+          this.setState(newState);
         };
 
         this.submitForm = ev => {
+          const { title, description, body, taglist } = this.state
+          ev.preventDefault();
+          const article = Object.assign({}, {title}, {description}, {body}, {taglist});
+          const { id } = props
+          props.onSubmitForm(id, article);
+        };
+
+        this.onAddTag = () => {
+          const taglist = [...this.state.taglist, this.state.tag];
+          const newState = Object.assign({}, {taglist}, {tag: ''});
+          this.setState(newState);
+        };
+
+        this.handleDelete = (tag) => {
+          this.setState(state => {
+            const taglist = [...state.taglist];
+            const tagToDelete = taglist.indexOf(tag);
+            taglist.splice(tagToDelete, 1);
+            return { taglist };
+          });
+        }
+
+        // When entering tags, hitting enter adds a tag to the list
+        this.watchForEnter = ev => {
+          if (ev.keyCode === 16) {
             ev.preventDefault();
-            const article = Object.assign({}, this.state);
-            const { id } = props
-            console.log("check 1:")
-            console.log(id)
-            console.log(article)
-            props.onSubmitForm(id, article);
+            this.onAddTag();
+          }
         };
     }
 
@@ -94,7 +120,7 @@ class Editor extends React.Component {
 
     render(){
         const { classes } = this.props;
-        const { title, description, body, tags } = this.state
+        const { title, description, body, tag, taglist } = this.state
         return (
             <main className={classes.main}>
               <CssBaseline />
@@ -131,16 +157,30 @@ class Editor extends React.Component {
                   <br/>
                   <FormControl margin="normal" fullWidth>
                     <TextField
-                        id="tags"
-                        label="Tags"
-                        placeholder="Enter Tags"
+                        id="tag"
+                        label="Tag"
+                        placeholder="Enter Tag"
                         margin="normal"
                         variant="outlined"
-                        value={tags}
-                        //onChange={this.updateState('tags')}
+                        value={tag}
+                        onChange={this.updateState('tag')}
+                        onKeyUp={this.watchForEnter}
                     />
                   </FormControl>
-                  <br/>
+                  {
+                    taglist.map(tag => {
+                        return (
+                        <Chip
+                            key={tag}
+                            label={tag}
+                            className={classes.chip}
+                            color="primary"
+                            variant="outlined"
+                            onDelete={() => this.handleDelete(tag)}
+                        />
+                        ) 
+                    })
+                  }
                   <FormControl margin="normal" fullWidth required>
                     <TextField
                         id="body"

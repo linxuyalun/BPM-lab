@@ -31,14 +31,14 @@ class Article extends React.Component {
 
     
     render () {
-        const { article } = this.props
+        const { article, userId } = this.props
         return (
             <React.Fragment>
                 <Banner article={article}/>
                 {
                     article.id &&
                     <div>
-                    <Title article={article}/>
+                    <Title userId={userId} article={article}/>
                     <MainView article={article} />
                     </div>
                 }

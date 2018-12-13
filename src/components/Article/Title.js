@@ -1,15 +1,17 @@
 import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import Chip from '@material-ui/core/Chip'
 import { Typography, Button } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
 import DeleteIcon from '@material-ui/icons/Delete'
 import EditIcon from '@material-ui/icons/Edit'
 import agent from '../../agent'
-import {withRouter} from "react-router-dom"
 
 const styles = theme => ({
     main: {
-        padding: theme.spacing.unit * 2,
+        marginTop: theme.spacing.unit,
+        marginBottom: theme.spacing.unit,
+        padding: theme.spacing.unit,
         width: "75%",
         marginLeft: 'auto',
         marginRight: 'auto',
@@ -27,7 +29,15 @@ const styles = theme => ({
         marginRight: theme.spacing.unit * 2,
         color: '#880e4f',
         sizeSmall: "5px"
-    }
+    },
+    chipbar: {
+        width: "100%",
+        paddingBottom: theme.spacing.unit,
+        paddingTop: theme.spacing.unit
+    },
+    chip: {
+        marginRight: theme.spacing.unit * 2,
+    },
 }) 
 
 class Title extends React.Component {
@@ -52,20 +62,43 @@ class Title extends React.Component {
                   {article.description}
               </Typography>
               <div>
-                  <Typography variant="caption">by</Typography>
-                  <Typography variant="subheading" color="secondary">{article.author.username}</Typography>
-                  <Typography variant="caption">Posted on</Typography>
-                  <Typography variant="subheading" color="secondary">{article.createat}</Typography>
-                  <Link to='/update'>
-                  <Button color="secondary" mini size="small" className={classes.button} >
-                      <EditIcon fontSize="small"/>
-                      <Typography variant="caption"> Edit</Typography>
-                  </Button>
-                  </Link>
-                  <Button color="secondary" mini size="small" onClick={this.clickDelete}  className={classes.button}>
-                      <DeleteIcon fontSize="small"/>
-                      <Typography variant="caption"> Delete</Typography>
-                  </Button>
+                <div className={classes.chipbar}>
+                    {
+                        article.taglist &&
+                        article.taglist.map(tag => {
+                            return (
+                            <Chip
+                                key={tag}
+                                label={tag}
+                                className={classes.chip}
+                                color="secondary"
+                                variant="outlined"
+                            />
+                            ) 
+                        })
+                    }
+                </div>
+                <Typography variant="caption">by</Typography>
+                <Link to={`/@${article.author.username}`}>
+                <Typography variant="subheading" color="secondary">{article.author.username}</Typography>
+                </Link>
+                <Typography variant="caption">Posted on</Typography>
+                <Typography variant="subheading" color="secondary">{article.createat}</Typography>
+                {
+                    (this.props.userId === article.author.id) &&
+                    <div>
+                    <Link to='/update'>
+                    <Button color="secondary" mini size="small" className={classes.button} >
+                        <EditIcon fontSize="small"/>
+                        <Typography variant="caption"> Edit</Typography>
+                    </Button>
+                    </Link>
+                    <Button color="secondary" mini size="small" onClick={this.clickDelete}  className={classes.button}>
+                        <DeleteIcon fontSize="small"/>
+                        <Typography variant="caption"> Delete</Typography>
+                    </Button>
+                    </div>
+                }
               </div>
             </div>
         );
