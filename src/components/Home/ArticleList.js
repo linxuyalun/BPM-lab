@@ -41,8 +41,9 @@ const ArticleList = ({ articles, classes }) => {
           } else {
             return null;
           }
-          */
+         */
          return <ArticlePreview key={article.id} article={article}/>
+         
         })
       }
     </Grid>

@@ -102,8 +102,8 @@ class Editor extends React.Component {
           });
         }
 
-        // When entering tags, hitting enter adds a tag to the list
-        this.watchForEnter = ev => {
+        // When entering tags, hitting SHIFT adds a tag to the list
+        this.watchForShift = ev => {
           if (ev.keyCode === 16) {
             ev.preventDefault();
             this.onAddTag();
@@ -164,7 +164,7 @@ class Editor extends React.Component {
                         variant="outlined"
                         value={tag}
                         onChange={this.updateState('tag')}
-                        onKeyUp={this.watchForEnter}
+                        onKeyUp={this.watchForShift}
                     />
                   </FormControl>
                   {

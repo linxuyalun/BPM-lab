@@ -1,7 +1,7 @@
 
 const superagent = require('superagent');
 
-const API_ROOT = 'http://149.248.14.120/api';
+const API_ROOT = 'http://45.76.75.242/api';
 
 const responseBody = res => res.body;
 
