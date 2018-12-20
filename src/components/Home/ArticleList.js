@@ -13,7 +13,6 @@ const styles = theme => ({
 })
 
 const ArticleList = ({ articles, classes }) => {
-  console.log(articles)
   if (!articles) {
     return (
       <Loading/>
@@ -32,17 +31,13 @@ const ArticleList = ({ articles, classes }) => {
     <Grid container className={classes.root}>
       {
         articles.map(article => {
-          // todo: 目前passstate是null，等到后端完善，相关代码：
-          /*
-          if (article.passstate) {
+          if (article.stat === "accept") {
             return (
               <ArticlePreview key={article.id} article={article}/>
           );
           } else {
             return null;
           }
-         */
-         return <ArticlePreview key={article.id} article={article}/>
          
         })
       }

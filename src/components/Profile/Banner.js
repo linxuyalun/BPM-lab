@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Avatar, Button } from '@material-ui/core'
+import { Typography, Avatar } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import deepPurple from '@material-ui/core/colors/deepPurple'
 

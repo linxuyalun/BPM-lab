@@ -42,27 +42,17 @@ const Articles = {
         requests.get(`/articles/get?articleid=${articleId}`),
     new: (id, article) =>
         requests.post(`/articles`, { user:{id}, article }),
-    update: (article) => {
-        console.log({article})
-        requests.put(`/articles`,{article})
-    }
-       
+    update: (article) => 
+        requests.put(`/articles`,{article}),
+    getTags: () =>
+        requests.get(`/tags`),
+    getByTag: (tag) => 
+        requests.get(`/articles/get?tag=${tag}`)
+        
 };
-
-
-const Comments = {
-    create: (slug, comment) =>
-      requests.post(`/articles/${slug}/comments`, { comment }),
-    delete: (slug, commentId) =>
-      requests.del(`/articles/${slug}/comments/${commentId}`),
-    forArticle: slug =>
-      requests.get(`/articles/${slug}/comments`)
-};
-
 
 export default {
     Articles,
     Auth,
-    Comments,
     Profile
 }

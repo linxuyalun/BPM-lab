@@ -6,8 +6,11 @@ function isPromise(v) {
 }
 
 const promiseMiddleware = store => next => action => {
+    console.log("---action.payload---")
+    console.log(action)
     if (isPromise(action.payload)) {
         store.dispatch({ type: 'ASYNC_START' })
+        console.log("---payload----")
         console.log(action.payload)
         action.payload.then(
             res => {

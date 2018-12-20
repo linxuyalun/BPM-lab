@@ -36,6 +36,7 @@ export default (state=defaultState, action) => {
         case 'PROFILE_UNLOAD':
         case 'HOME_PAGE_UNLOAD':
         case 'ARTICLE_PAGE_UNLOAD':
+        case 'ARTICLE_PAGE_LOADED':
             return {
                 ...state,
                 inProgress: false

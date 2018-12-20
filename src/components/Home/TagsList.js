@@ -1,7 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Chip from '@material-ui/core/Chip'
 import FaceIcon from '@material-ui/icons/Face'
 import { withStyles } from '@material-ui/core/styles'
+import agent from '../../agent'
 
 const styles = theme => ({
     chip: {
@@ -9,25 +11,46 @@ const styles = theme => ({
     },
 });
 
-const tags = ['Shanghai','Beijing','City','Dan']
 
-const TagsList =  ({classes}) => {
-    return (
-        tags.map(tag => {
+const mapDispatchToProps = dispatch => ({
+    onClickTag: (tag) =>
+      dispatch({ type: 'TAG_CHOSEN', payload: agent.Articles.getByTag(tag)})
+})
+
+
+class TagsList extends React.Component {
+
+    constructor(props){
+        super(props)
+        this.clickTag = tag => {
+            props.onClickTag(tag)
+        }
+    }
+
+    render() {
+        const { classes, tags } = this.props
+        if (tags) {
             return (
-            <Chip
-                icon={<FaceIcon />}
-                label={tag}
-                className={classes.chip}
-                clickable
-                color="secondary"
-                variant="outlined"
-            />
-            ) 
-        })
-    )
+                tags.map(tag => {
+                    return (
+                    <Chip
+                        key={tag}
+                        icon={<FaceIcon />}
+                        label={tag}
+                        className={classes.chip}
+                        clickable
+                        color="secondary"
+                        variant="outlined"
+                        onClick={() => this.clickTag(tag)}
+                    />
+                    ) 
+                })
+            )
+        }
+        return null
+    }
 }
 
-export default withStyles(styles)(TagsList);
+export default connect(()=>({}), mapDispatchToProps)(withStyles(styles)(TagsList));
 
       

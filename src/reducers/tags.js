@@ -1,9 +1,8 @@
 export default (state={}, action) => {
     switch(action.type){
-        case 'HOME_PAGE_LOADED':
-        case 'TAG_CHOSEN':
+        case 'TAGS_LOADED':
             return {
-                articles: action.payload.articles.reverse(),
+                tags: action.payload.tags,
             }
         case 'HOME_PAGE_UNLOAD':
             return {}

@@ -16,7 +16,6 @@ const mapDispatchToProps = dispatch => ({
         dispatch({type: 'PROFILE_LOADED', payload: agent.Profile.get(id, username)}),
     onUnload: () =>
         dispatch({type: 'PROFILE_UNLOAD'}),
-    // ToUpdate
     onArticlesLoad: () =>
         dispatch({type: 'HOME_PAGE_LOADED', payload: agent.Articles.all()}),
 })
@@ -33,14 +32,14 @@ class Profile extends React.Component {
     }
     
     render () {
-        const { profile, articles } = this.props
+        const { profile, id, articles } = this.props
         return (
             <React.Fragment>
             {
                 profile.username &&
                 <React.Fragment>
                     <Banner profile={profile}/>
-                    <MainView articles={articles}/>
+                    <MainView id={id} articles={articles}/>
                 </React.Fragment>
             
             }

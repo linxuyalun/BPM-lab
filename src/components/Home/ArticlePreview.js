@@ -33,7 +33,6 @@ const styles = theme => ({
 export default withStyles(styles)(({article, classes}) => {
     return (
         <Grid item className={classes.root}>
-        {console.log(article)}
         <Toolbar className={classes.Toolbar} >
             <Avatar alt={article.author.username} src={article.author.image} />
             <Link to={`@${article.author.username}`} >

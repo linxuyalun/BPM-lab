@@ -12,8 +12,7 @@ const styles = theme => ({
   }
 })
 
-const PassedArticles = ({ articles, classes }) => {
-  console.log(articles)
+const PassedArticles = ({ articles, id, classes }) => {
   if (!articles) {
     return (
       <Loading/>
@@ -32,17 +31,13 @@ const PassedArticles = ({ articles, classes }) => {
     <Grid container className={classes.root}>
       {
         articles.map(article => {
-          // todo: 目前passstate是null，等到后端完善，相关代码：
-          /*
-          if (article.passstate) {
+          if (article.stat!=="accept" && id===article.author.id ) {
             return (
               <ArticlePreview key={article.id} article={article}/>
           );
           } else {
             return null;
           }
-          */
-         return <ArticlePreview article={article}/>
         })
       }
     </Grid>

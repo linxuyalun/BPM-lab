@@ -5,6 +5,7 @@ import Title from './Title'
 import MainView from './MainView'
 import Loading from '../Loading'
 import agent from '../../agent'
+import ReviewList from './ReviewList'
 
 const mapStateToProps = state => ({
     userId: state.user.id,
@@ -40,6 +41,7 @@ class Article extends React.Component {
                     <div>
                     <Title userId={userId} article={article}/>
                     <MainView article={article} />
+                    <ReviewList editor={article.editor}/>
                     </div>
                 }
                 {

@@ -5,6 +5,7 @@ import user from './reducers/user'
 import profile from './reducers/profile'
 import articles from './reducers/articles'
 import article from './reducers/article'
+import tags from './reducers/tags'
 
   
 const reducer = combineReducers({
@@ -12,7 +13,8 @@ const reducer = combineReducers({
   user,
   profile,
   article,
-  articles
+  articles,
+  tags
 });
   
 const middleware = applyMiddleware(promiseMiddleware);

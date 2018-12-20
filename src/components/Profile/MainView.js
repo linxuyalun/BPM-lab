@@ -29,7 +29,7 @@ class MainView extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, id, articles } = this.props;
     const { tabValue } = this.state ;
     return (
       <React.Fragment>
@@ -48,8 +48,8 @@ class MainView extends React.Component {
             <Tab label="Not passed" />
           </Tabs>
         </AppBar>
-        {tabValue === 0 && <PassedArticles articles={this.props.articles}/>}
-        {tabValue === 1 && <UnpassedArticles articles={this.props.articles}/>}
+        {tabValue === 0 && <PassedArticles id={id} articles={articles}/>}
+        {tabValue === 1 && <UnpassedArticles id={id} articles={articles}/>}
       </React.Fragment>
     );
   }

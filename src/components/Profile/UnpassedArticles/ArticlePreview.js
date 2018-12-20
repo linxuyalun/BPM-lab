@@ -28,9 +28,19 @@ const styles = theme => ({
 })
 
 export default withStyles(styles)(({article, classes}) => {
-    const activeStep = 2
+    let activeStep = 1
+    let errors = [false, false, false, false]
     const steps = ['作者发布文章', '主编分配编辑', '编辑审稿','主编终审']
-    const errors = [false, false, true, false]
+    if(article.editor.editor1){
+        activeStep = 2
+        if(article.editor.editor1.decision!=="checking" && article.editor.editor2.decision!=="checking"){
+            activeStep = 3
+        }
+    }
+    if(article.stat==="reject"){
+        errors[3]=true
+        activeStep = 3
+    }
     return (
         <Grid item className={classes.root}>
         <Link to={`a${article.id}`} >

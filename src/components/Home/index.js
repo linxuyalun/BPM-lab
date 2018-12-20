@@ -8,12 +8,15 @@ import agent from '../../agent'
 
 const mapStateToProps = state => ({
   appName: state.common.appName,
-  articles: state.articles.articles
+  articles: state.articles.articles,
+  tags: state.tags.tags
 });
 
 const mapDispatchToProps = dispatch => ({
   onLoad: () =>
     dispatch({type: 'HOME_PAGE_LOADED', payload: agent.Articles.all()}),
+  onTagLoad: () =>
+    dispatch({type: 'TAGS_LOADED', payload: agent.Articles.getTags()}),
   onUnload: () =>
     dispatch({type:'HOME_PAGE_UNLOAD'})
 })
@@ -22,6 +25,7 @@ class Home extends React.Component {
 
   componentWillMount() {
     this.props.onLoad()
+    this.props.onTagLoad()
   }
 
   componentWillUnmount() {
@@ -30,12 +34,12 @@ class Home extends React.Component {
   
     
   render() {
-    const { appName, articles } = this.props
+    const { appName, articles, tags } = this.props
     return (
       <React.Fragment>
         <Banner appName={appName} />
         <Grid>
-            <MainView articles={articles} />
+            <MainView articles={articles} tags={tags} />
         </Grid>
       </React.Fragment>
     );

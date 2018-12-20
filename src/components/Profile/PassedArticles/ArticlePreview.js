@@ -1,5 +1,5 @@
 import React from 'react'
-import { Toolbar, Grid, Avatar, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 

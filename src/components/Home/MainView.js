@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppBar, Tabs, Tab, Button, Typography } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { withStyles } from '@material-ui/core/styles'
@@ -18,7 +18,7 @@ const styles = theme => ({
 class MainView extends React.Component {
 
   render() {
-    const { articles, classes } = this.props;
+    const { articles, classes, tags } = this.props;
     return (
       <React.Fragment>
         <ExpansionPanel className={classes.panel}>
@@ -26,7 +26,7 @@ class MainView extends React.Component {
             <Typography variant="overline" color="secondary" className={classes.summary}>Choose a tag</Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
-            <TagsList/>
+            <TagsList tags={tags}/>
             </ExpansionPanelDetails>
         </ExpansionPanel>
         <ArticleList articles={articles}/>
