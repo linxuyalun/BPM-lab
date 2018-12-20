@@ -24,10 +24,30 @@ The Hermes codebase uses [create-react-app](https://github.com/facebook/create-r
 - [x] login, log out, sign up
 - [x] check/update profile
 - [x] check articles
-- [ ] check an article state
+- [x] check an article state
 - [x] post a new article
 - [x] update/delete a article
-- [ ] filter articles by tag
+- [x] filter articles by tag
 
+### Screenshots
 
+**Main View**
+
+![mainview](https://github.com/linxuyalun/BPM-lab/blob/master/screenshots/mainview.gif?raw=true)
+
+**Login**
+
+![login.gif](https://github.com/linxuyalun/BPM-lab/blob/master/screenshots/login.gif?raw=true)
+
+**New Post**
+
+![newPost](https://github.com/linxuyalun/BPM-lab/blob/master/screenshots/newPost.gif?raw=true)
+
+**An Article**
+
+![article](https://github.com/linxuyalun/BPM-lab/blob/master/screenshots/article.gif?raw=true)
+
+**Profile**
+
+![profile](https://github.com/linxuyalun/BPM-lab/blob/master/screenshots/profile.gif?raw=true)
 
