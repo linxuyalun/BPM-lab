@@ -6,11 +6,10 @@ import store from './store'
 import theme from './theme'
 import App from './App'
 
-
 ReactDOM.render((
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
-    <App />
+      <App />
     </MuiThemeProvider>
-  </Provider> 
-), document.getElementById('root'));
+  </Provider>
+), document.getElementById('root'))
